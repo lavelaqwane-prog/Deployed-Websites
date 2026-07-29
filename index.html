@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gqomfa Funeral Directors — Where Every Life is honoured</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15120d;
+    --ink-soft:#1e1a14;
+    --card:#241f18;
+    --bone:#f1ead9;
+    --bone-dim:#cfc4ac;
+    --gold:#b8934f;
+    --gold-bright:#dcb679;
+    --ochre:#a2502f;
+    --ochre-soft:#7a3d26;
+    --green:#3c4a3a;
+    --line:rgba(184,147,79,0.28);
+    --radius:2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  h1,h2,h3,h4{font-family:'Fraunces', serif; font-weight:500; letter-spacing:-0.01em; color:var(--bone);}
+  .eyebrow{
+    font-family:'Work Sans', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:0.72rem;
+    color:var(--gold-bright);
+    font-weight:600;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 28px;
+    border:1px solid var(--gold);
+    color:var(--bone);
+    font-size:0.9rem;
+    letter-spacing:0.03em;
+    font-weight:500;
+    border-radius:var(--radius);
+    transition:all .25s ease;
+    cursor:pointer;
+    background:transparent;
+  }
+  .btn:hover{background:var(--gold); color:var(--ink); border-color:var(--gold);}
+  .btn.solid{background:var(--gold); color:var(--ink);}
+  .btn.solid:hover{background:var(--gold-bright); border-color:var(--gold-bright);}
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ===== HEADER ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(21,18,13,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px;
+    max-width:1180px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand svg{width:34px; height:34px;}
+  .brand-text{font-family:'Fraunces', serif; font-size:1.05rem; letter-spacing:0.04em; line-height:1.1;}
+  .brand-text small{display:block; font-family:'Work Sans'; font-size:0.6rem; letter-spacing:0.16em; color:var(--gold-bright); text-transform:uppercase; margin-top:3px; font-weight:600;}
+  .nav-links{display:flex; gap:34px; align-items:center;}
+  .nav-links a{font-size:0.85rem; letter-spacing:0.02em; color:var(--bone-dim); transition:color .2s;}
+  .nav-links a:hover{color:var(--gold-bright);}
+  .nav-cta{display:flex; align-items:center; gap:18px;}
+  .nav-phone{font-size:0.85rem; color:var(--gold-bright); font-weight:500; letter-spacing:0.02em;}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .burger span{width:24px; height:2px; background:var(--bone);}
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh;
+    display:flex; align-items:center;
+    position:relative;
+    overflow:hidden;
+    padding-top:90px;
+    /* Logo artwork sits behind a dark overlay so it reads as a subtle
+       textured backdrop (the dove emblem ghosting through) rather than
+       competing with the headline text, which repeats similar wording. */
+    background:
+      radial-gradient(ellipse at 78% 18%, rgba(184,147,79,0.14), transparent 55%),
+      radial-gradient(ellipse at 15% 85%, rgba(60,74,58,0.35), transparent 60%),
+      linear-gradient(180deg, rgba(21,18,13,0.88) 0%, rgba(21,18,13,0.8) 45%, rgba(21,18,13,0.94) 100%),
+      url('images/gqomfa-logo-bg.jpg') center 30% / cover no-repeat,
+      var(--ink);
+  }
+  .hero-ring{
+    position:absolute; right:-180px; top:50%; transform:translateY(-50%);
+    width:820px; height:820px;
+    border:1px solid var(--line);
+    border-radius:50%;
+  }
+  .hero-ring::before{
+    content:''; position:absolute; inset:60px;
+    border:1px solid rgba(184,147,79,0.14);
+    border-radius:50%;
+  }
+  .hero-dove{position:absolute; right:60px; top:50%; transform:translateY(-50%); width:280px; opacity:0.9;}
+  .hero-content{position:relative; z-index:2; max-width:640px;}
+  .hero-content .eyebrow{margin-bottom:22px; display:block;}
+  .hero h1{
+    font-size:clamp(2.6rem, 5.6vw, 4.4rem);
+    line-height:1.04;
+    font-weight:500;
+  }
+  .hero h1 em{font-style:italic; font-weight:400; color:var(--gold-bright);}
+  .hero p.lede{
+    margin-top:26px; font-size:1.08rem; color:var(--bone-dim); max-width:480px; font-weight:300;
+  }
+  .hero-actions{display:flex; gap:16px; margin-top:40px; flex-wrap:wrap;}
+  .hero-reg{margin-top:56px; font-size:0.75rem; color:var(--bone-dim); letter-spacing:0.04em; opacity:0.7;}
+  .scroll-cue{
+    position:absolute; bottom:38px; left:32px;
+    display:flex; align-items:center; gap:10px; font-size:0.7rem;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--bone-dim);
+  }
+  .scroll-cue .line{width:36px; height:1px; background:var(--gold); position:relative; overflow:hidden;}
+  .scroll-cue .line::after{content:''; position:absolute; left:-100%; top:0; width:100%; height:100%; background:var(--gold-bright); animation:cue 2.2s ease-in-out infinite;}
+  @keyframes cue{0%{left:-100%;} 50%{left:0;} 100%{left:100%;}}
+
+  /* ===== SECTION SHELLS ===== */
+  section{padding:120px 0;}
+  .section-head{max-width:640px; margin-bottom:64px;}
+  .section-head .eyebrow{display:block; margin-bottom:18px;}
+  .section-head h2{font-size:clamp(1.9rem, 3.4vw, 2.6rem); font-weight:500;}
+  .section-head p{margin-top:18px; color:var(--bone-dim); font-weight:300; font-size:1.02rem;}
+  .divider{height:1px; background:var(--line); width:100%;}
+
+  /* ===== ABOUT ===== */
+  .about{background:var(--ink-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .about-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:70px; align-items:start;}
+  .about-copy p{color:var(--bone-dim); font-weight:300; margin-bottom:18px; font-size:1.02rem;}
+  .about-copy p:first-child{font-family:'Fraunces', serif; font-size:1.35rem; font-style:italic; color:var(--bone); font-weight:400; line-height:1.5;}
+  .vm-stack{display:flex; flex-direction:column; gap:2px;}
+  .vm-card{background:var(--card); border:1px solid var(--line); padding:32px; border-radius:var(--radius);}
+  .vm-card .eyebrow{margin-bottom:12px;}
+  .vm-card p{color:var(--bone-dim); font-weight:300; font-size:0.96rem;}
+
+  /* ===== TIMELINE (waiting periods) ===== */
+  .timeline-wrap{position:relative; padding-top:20px;}
+  .timeline-track{position:relative; height:2px; background:var(--line); margin:70px 0 90px;}
+  .tl-point{
+    position:absolute; top:50%; transform:translate(-50%,-50%);
+    width:14px; height:14px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--gold);
+  }
+  .tl-point.filled{background:var(--gold);}
+  .tl-label{
+    position:absolute; top:-64px; width:220px; text-align:left;
+    transform:translateX(-50%);
+  }
+  .tl-label.right{text-align:left;}
+  .tl-label .tl-time{font-family:'Fraunces', serif; font-size:1.6rem; color:var(--gold-bright); font-weight:500;}
+  .tl-label .tl-name{font-size:0.8rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--bone-dim); margin-top:4px;}
+  .tl-desc{
+    position:absolute; top:36px; width:230px; font-size:0.86rem; color:var(--bone-dim); font-weight:300; transform:translateX(-50%);
+  }
+  .tl-point[data-p="0"]{left:2%;}
+  .tl-point[data-p="6"]{left:50%;}
+  .tl-point[data-p="12"]{left:96%;}
+  .tl-label[data-p="0"]{left:2%;}
+  .tl-label[data-p="6"]{left:50%;}
+  .tl-label[data-p="12"]{left:96%; text-align:right; transform:translateX(-90%);}
+  .tl-desc[data-p="0"]{left:2%; transform:translateX(0);}
+  .tl-desc[data-p="6"]{left:50%;}
+  .tl-desc[data-p="12"]{left:96%; text-align:right; transform:translateX(-100%);}
+  @media(max-width:820px){
+    .timeline-track{display:none;}
+    .tl-mobile{display:flex !important; flex-direction:column; gap:0;}
+  }
+
+  .tl-mobile{display:none;}
+  .tl-mobile .tl-row{
+    display:flex; gap:22px; padding:24px 0; border-bottom:1px solid var(--line);
+  }
+  .tl-mobile .tl-row .tl-time{font-family:'Fraunces', serif; font-size:1.5rem; color:var(--gold-bright); min-width:76px;}
+  .tl-mobile .tl-row .tl-name{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--bone);}
+  .tl-mobile .tl-row .tl-desc{font-size:0.86rem; color:var(--bone-dim); font-weight:300; margin-top:6px;}
+
+  .accident-note{
+    margin-top:30px; padding:24px 28px; background:rgba(160,80,47,0.1);
+    border-left:2px solid var(--ochre); font-size:0.92rem; color:var(--bone-dim); font-weight:300;
+  }
+  .accident-note strong{color:var(--bone); font-weight:500;}
+
+  /* ===== PREMIUM CALCULATOR ===== */
+  .calc{background:var(--ink-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .calc-panel{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:48px; display:grid; grid-template-columns:1fr 1fr; gap:56px;
+  }
+  .calc-controls .field{margin-bottom:32px;}
+  .calc-controls .field:last-child{margin-bottom:0;}
+  .field-label{font-size:0.74rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold-bright); font-weight:600; margin-bottom:14px; display:block;}
+  .pill-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .pill{
+    padding:10px 18px; border:1px solid var(--line); border-radius:20px;
+    font-size:0.86rem; color:var(--bone-dim); cursor:pointer; transition:all .2s ease; background:transparent;
+    font-family:'Work Sans';
+  }
+  .pill:hover{border-color:var(--gold);}
+  .pill.active{background:var(--gold); border-color:var(--gold); color:var(--ink); font-weight:600;}
+  .calc-result{
+    display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+    border-left:1px solid var(--line); padding-left:56px;
+  }
+  .calc-result .eyebrow{margin-bottom:10px;}
+  .price{font-family:'Fraunces', serif; font-size:4rem; color:var(--bone); line-height:1; font-weight:500;}
+  .price sup{font-size:1.6rem; color:var(--gold-bright); font-weight:400;}
+  .price span.per{font-size:1rem; color:var(--bone-dim); font-family:'Work Sans'; font-weight:300;}
+  .calc-sub{margin-top:14px; font-size:0.88rem; color:var(--bone-dim); font-weight:300;}
+  .join-fee{margin-top:26px; padding-top:22px; border-top:1px dashed var(--line); font-size:0.86rem; color:var(--bone-dim); font-weight:300;}
+  .join-fee strong{color:var(--gold-bright); font-weight:600;}
+
+  @media(max-width:760px){
+    .calc-panel{grid-template-columns:1fr; padding:32px;}
+    .calc-result{border-left:none; padding-left:0; border-top:1px solid var(--line); padding-top:32px; margin-top:8px;}
+  }
+
+  .table-toggle{margin-top:36px; text-align:center;}
+  .full-table{
+    margin-top:30px; width:100%; border-collapse:collapse; font-size:0.9rem; display:none;
+  }
+  .full-table.show{display:table;}
+  .full-table th, .full-table td{
+    padding:14px 18px; text-align:left; border-bottom:1px solid var(--line); font-weight:300; color:var(--bone-dim);
+  }
+  .full-table th{color:var(--gold-bright); font-weight:600; text-transform:uppercase; font-size:0.72rem; letter-spacing:0.08em;}
+  .full-table tr:hover td{color:var(--bone);}
+
+  /* ===== DOCUMENTS ===== */
+  .docs-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .doc-item{background:var(--ink); padding:28px 30px; display:flex; gap:18px; align-items:flex-start;}
+  .doc-item svg{flex-shrink:0; width:20px; height:20px; margin-top:3px; color:var(--gold);}
+  .doc-item p{font-size:0.94rem; color:var(--bone-dim); font-weight:300;}
+  @media(max-width:700px){.docs-grid{grid-template-columns:1fr;}}
+
+  .cost-note{
+    margin-top:56px; display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--line); border:1px solid var(--line);
+  }
+  .cost-note-col{background:var(--card); padding:36px;}
+  .cost-note-col h4{font-size:1.1rem; margin-bottom:14px; font-weight:500;}
+  .cost-note-col p, .cost-note-col li{font-size:0.9rem; color:var(--bone-dim); font-weight:300;}
+  .cost-note-col ul{margin-top:12px; padding-left:18px;}
+  .cost-note-col li{margin-bottom:6px;}
+  @media(max-width:700px){.cost-note{grid-template-columns:1fr;}}
+
+  /* ===== CONTACT ===== */
+  .contact{
+    background:linear-gradient(180deg, var(--ink-soft), var(--ink));
+    border-top:1px solid var(--line);
+  }
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px;}
+  .contact-list{display:flex; flex-direction:column; gap:0;}
+  .contact-row{
+    display:flex; gap:20px; padding:26px 0; border-bottom:1px solid var(--line); align-items:flex-start;
+  }
+  .contact-row:first-child{padding-top:0;}
+  .contact-row svg{width:20px; height:20px; color:var(--gold); flex-shrink:0; margin-top:4px;}
+  .contact-row .label{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--gold-bright); font-weight:600; margin-bottom:6px;}
+  .contact-row .val{font-size:1.05rem; color:var(--bone); font-weight:400;}
+  .contact-row .val a:hover{color:var(--gold-bright);}
+  .map-plate{
+    border:1px solid var(--line); background:var(--card); border-radius:var(--radius);
+    padding:50px 40px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:18px;
+    min-height:320px;
+  }
+  .map-plate svg{width:46px; height:46px; color:var(--gold);}
+  .map-plate h4{font-size:1.3rem; font-weight:500;}
+  .map-plate p{color:var(--bone-dim); font-size:0.92rem; font-weight:300; max-width:280px;}
+
+  /* ===== EMBEDDED ENQUIRY FORM ===== */
+  .enquiry-form{
+    border:1px solid var(--line); background:var(--card); border-radius:var(--radius);
+    padding:40px;
+  }
+  .ef-field{margin-bottom:20px;}
+  .ef-field label{
+    display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em;
+    color:var(--gold-bright); font-weight:600; margin-bottom:8px;
+  }
+  .ef-req{color:var(--ochre);}
+  .enquiry-form input, .enquiry-form select{
+    width:100%; padding:13px 14px; border:1px solid var(--line); background:var(--ink-soft);
+    font-family:'Work Sans'; font-size:0.92rem; color:var(--bone); border-radius:var(--radius);
+  }
+  .enquiry-form input::placeholder{color:var(--bone-dim); opacity:0.6;}
+  .enquiry-form input:focus, .enquiry-form select:focus{outline:none; border-color:var(--gold);}
+  .enquiry-form select{
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5.5 7.5l4.5 4.5 4.5-4.5' stroke='%23b8934f' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 14px center;
+  }
+  .ef-status{margin-top:16px; font-size:0.86rem; padding:14px 16px; border-radius:var(--radius); display:none; font-weight:300;}
+  .ef-status.ok{display:block; background:rgba(60,74,58,0.35); color:var(--bone); border-left:2px solid #6c8a6f;}
+  .ef-status.err{display:block; background:rgba(162,80,47,0.15); color:var(--bone); border-left:2px solid var(--ochre);}
+
+  /* ===== FOOTER ===== */
+  footer{padding:60px 0 40px; border-top:1px solid var(--line);}
+  .footer-grid{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;}
+  .footer-brand{display:flex; align-items:center; gap:12px;}
+  .footer-brand svg{width:26px; height:26px;}
+  .footer-brand span{font-family:'Fraunces', serif; font-size:0.95rem;}
+  .footer-tag{font-size:0.82rem; color:var(--bone-dim); font-style:italic; font-family:'Fraunces', serif;}
+  .footer-meta{font-size:0.75rem; color:var(--bone-dim); opacity:0.7;}
+  .footer-links{display:flex; gap:26px;}
+  .footer-links a{font-size:0.82rem; color:var(--bone-dim);}
+  .footer-links a:hover{color:var(--gold-bright);}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:900px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .about-grid{grid-template-columns:1fr; gap:40px;}
+    .hero-dove{width:180px; opacity:0.5;}
+    .hero-ring{width:520px; height:520px; right:-260px;}
+  }
+  @media(max-width:600px){
+    .wrap{padding:0 20px;}
+    section{padding:80px 0;}
+    .nav{padding:14px 20px;}
+    .hero-actions{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="nav">
+    <div class="brand">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="22" stroke="#b8934f" stroke-width="1"/>
+        <path d="M14 26c3-6 8-9 10-9-1 2-1 4 0 6 2-1 5-1 7 1-3 1-5 1-6 3 3 0 5 1 6 3-4 1-8 0-10-2-3 2-5 2-7-2z" fill="#b8934f"/>
+      </svg>
+      <div class="brand-text">Gqomfa<br><small>Funeral Directors</small></div>
+    </div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#cover">Cover</a>
+      <a href="#premiums">Premiums</a>
+      <a href="#documents">Documents</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:0647806602">064 780 6602 |064 870 3855 | 061 285 7314 </a>
+      <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-ring"></div>
+  <svg class="hero-dove" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="98" stroke="#b8934f" stroke-width="0.6" opacity="0.5"/>
+    <path d="M40 110c14-26 34-38 42-38-4 8-4 16 0 24 8-4 20-4 28 4-12 4-20 4-24 12 12 0 20 4 24 12-16 4-32 0-40-8-12 8-20 8-30-6z" fill="#b8934f" opacity="0.85"/>
+  </svg>
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="eyebrow reveal in">Keiskammahoek · Eastern Cape</span>
+      <h1 class="reveal in">Where Every<br>Life <em>is</em><br>Honoured</h1>
+      <p class="lede reveal in">Rooted in the values of our forefathers, Gqomfa Funeral Directors walks alongside families in their most difficult moments — blending cultural tradition with modern, dependable funeral cover.</p>
+      <div class="hero-actions reveal in">
+        <a href="#premiums" class="btn solid">View policy premiums</a>
+        <a href="tel:0647806602" class="btn">Call 064 780 6602</a>
+        <a href="tel:0648703855" class="btn">Call 064 870 3855</a>
+        <a href="tel:0612857314" class="btn">Call 061 285 7314</a>
+      </div>
+      <div class="hero-reg reveal in">Reg. 2026/151129/07</div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span>Scroll</div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p>At Gqomfa Funeral Directors, we walk alongside families during their most difficult times with compassion, respect, and dignity.</p>
+        <p>Rooted in the values of our forefathers, we are committed to preserving cultural traditions while embracing modern funeral practices that bring comfort and ease. Every family we serve is met with care, honesty, and the quiet steadiness that this moment calls for.</p>
+      </div>
+      <div class="vm-stack reveal">
+        <div class="vm-card">
+          <span class="eyebrow">Vision</span>
+          <p>To be a trusted and caring presence in our community, celebrating every life with dignity, compassion, and respect — honouring our cultural heritage while embracing modern funeral solutions that bring comfort, unity, and peace of mind to every family we serve.</p>
+        </div>
+        <div class="vm-card">
+          <span class="eyebrow">Mission</span>
+          <p>To provide compassionate, professional, and culturally grounded funeral services families can rely on. Through integrity, empathy, and excellence, we walk hand in hand with every family — offering support, comfort, and dignity every step of the way.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COVER / WAITING PERIODS ===== -->
+<section id="cover">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Your Cover</span>
+      <h2>What's covered, and when</h2>
+      <p>Cover begins the moment your first premium is paid — but the type of cover determines how soon a claim can be honoured. Here's how it builds over time.</p>
+    </div>
+
+    <div class="timeline-wrap reveal">
+      <div class="timeline-track">
+        <div class="tl-point filled" data-p="0"></div>
+        <div class="tl-point" data-p="6"></div>
+        <div class="tl-point" data-p="12"></div>
+
+        <div class="tl-label" data-p="0"><div class="tl-time">Day 1</div><div class="tl-name">Accidental Death</div></div>
+        <div class="tl-desc" data-p="0">Covered immediately once the first premium is paid and the policy is active.</div>
+
+        <div class="tl-label" data-p="6"><div class="tl-time">6 mo</div><div class="tl-name">Natural Death</div></div>
+        <div class="tl-desc" data-p="6">A six-month waiting period applies to all natural causes of death.</div>
+
+        <div class="tl-label" data-p="12"><div class="tl-time">12 mo</div><div class="tl-name">Suicide Clause</div></div>
+        <div class="tl-desc" data-p="12">Covered only after twelve months of continuous premium payments.</div>
+      </div>
+
+      <div class="tl-mobile">
+        <div class="tl-row"><div class="tl-time">Day 1</div><div><div class="tl-name">Accidental Death</div><div class="tl-desc">Covered immediately once the first premium is paid and the policy is active. Includes motor vehicle accidents, workplace accidents, fire-related incidents, and other unforeseen accidental events.</div></div></div>
+        <div class="tl-row"><div class="tl-time">6 mo</div><div><div class="tl-name">Natural Death</div><div class="tl-desc">A six-month waiting period applies to all natural causes of death. No funeral service is provided for a natural death within this period.</div></div></div>
+        <div class="tl-row"><div class="tl-time">12 mo</div><div><div class="tl-name">Suicide Clause</div><div class="tl-desc">Covered only after twelve months of continuous, uninterrupted premium payments.</div></div></div>
+      </div>
+
+      <div class="accident-note">
+      
+        <div></div><strong>Accidental death cover applies immediately</strong> — provided the first monthly premium has been successfully paid and the policy is active at the time of death. Gqomfa Funeral Directors reserves the right to request supporting documents or official reports for accidental death claims.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PREMIUM CALCULATOR ===== -->
+<section class="calc" id="premiums">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Policy Premiums</span>
+      <h2>Find your monthly premium</h2>
+      <p>Choose a policy type and an age range to see the monthly premium. A once-off non-refundable joining fee applies on registration — R100 for a Single Member, R150 for Extended Family.Memebership will become active once joining fee and first monthly premium is recieved.</p>
+      <p>Monthly premium must be paid on or before the agreed payment date each month. Failure to pay may result in suspension of cancelllation of cover.</p>
+    <p> Failure to pay premiums for two consecutive months will result in the automatic policy lapse and forfeiture of all benefits.</p>
+     <!-- ====Test====-->
+       <div class="accident-note">
+      
+        <div></div><strong>Important Notice</strong> — A 6-month waiting period applies from the reciept of the first premium. No funeral benefits may be claimed during this period. <br> Immediate cover for accidental death. <br> Memebers qualify for a funeral cover from as little as <strong> R15 000</strong> - which is not paid in cash and may only be used for funeral services by Gqomfa Funeral Directors.
+      </div>
+    
+  </div>
+
+    <div class="calc-panel reveal">
+      <div class="calc-controls">
+        <div class="field">
+          <span class="field-label">Policy Type</span>
+          <div class="pill-row" id="typeRow">
+            <button class="pill" data-type="single">Single Member</button>
+            <button class="pill" data-type="fam5">Extended Family (1+5 pax)</button>
+            <button class="pill" data-type="fam9">Extended Family (1+9 pax)</button>
+          </div>
+        </div>
+        <div class="field">
+          <span class="field-label">Age Range</span>
+          <div class="pill-row" id="ageRow"></div>
+        </div>
+      </div>
+      <div class="calc-result">
+        <span class="eyebrow" id="resultType">Select a policy type</span>
+        <div class="price"><sup>R</sup><span id="resultPrice">—</span><span class="per"> /month</span></div>
+        <div class="calc-sub" id="resultAge">Choose an age range to see your premium.</div>
+        <div class="join-fee">Once-off joining fee: <strong id="joinFee">R100 (Single) / R150 (Extended Family)</strong> — payable on registration, non-refundable.</div>
+      </div>
+    </div>
+
+    <div class="table-toggle reveal">
+      <button class="btn" id="tableToggleBtn">View full premium table</button>
+    </div>
+
+    <table class="full-table" id="fullTable">
+      <thead><tr><th>Policy Type</th><th>Age Range</th><th>Monthly Premium</th></tr></thead>
+      <tbody>
+        <tr><td>Single Member</td><td>18 – 64 yrs</td><td>R150.00</td></tr>
+        <tr><td>Single Member</td><td>65 – 74 yrs</td><td>R180.00</td></tr>
+        <tr><td>Single Member</td><td>75 – 84 yrs</td><td>R305.00</td></tr>
+        <tr><td>Extended Family (1+5 pax)</td><td>18 – 64 yrs</td><td>R350.00</td></tr>
+        <tr><td>Extended Family (1+5 pax)</td><td>65 – 74 yrs</td><td>R450.00</td></tr>
+        <tr><td>Extended Family (1+5 pax)</td><td>75 – 84 yrs</td><td>R650.00</td></tr>
+        <tr><td>Extended Family (1+9 pax)</td><td>0 – 64 yrs</td><td>R550.00</td></tr>
+        <tr><td>Extended Family (1+9 pax)</td><td>65 – 74 yrs</td><td>R650.00</td></tr>
+        <tr><td>Extended Family (1+9 pax)</td><td>75 – 84 yrs</td><td>R750.00</td></tr>
+        
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== DOCUMENTS + COSTS ===== -->
+<section id="documents">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">At Claim Time</span>
+      <h2>Documents we'll ask for</h2>
+      <p>Certified copies of the following may be required to process a claim.</p>
+    </div>
+
+    <div class="docs-grid reveal">
+      <div class="doc-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        <p>Valid South African ID of the deceased</p>
+      </div>
+      <div class="doc-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        <p>Valid South African ID of the main member</p>
+      </div>
+      <div class="doc-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h9l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M15 3v5h5"/></svg>
+        <p>Official death certificate</p>
+      </div>
+      <div class="doc-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h9l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M15 3v5h5"/></svg>
+        <p>Burial order</p>
+      </div>
+      <div class="doc-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M13 14c3 0 6 2.5 6 6"/></svg>
+        <p>Proof of relationship, where applicable</p>
+      </div>
+      <div class="doc-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+        <p>Any additional documents requested by management</p>
+      </div>
+    </div>
+
+    <div class="cost-note reveal">
+      <div class="cost-note-col">
+        <h4>What your cover includes</h4>
+        <p>Funeral arrangements and burial services for the main member are conducted directly by Gqomfa Funeral Directors according to the selected policy — no cash payout is made. This applies in every case, including accidental or suicidal death.</p>
+        <li>Pick up (100km Radius)</li>
+        <li>Storage</li>
+        <li>Registration of Death</li>
+        <li>Casket & Cross</li>
+        <li>Wreath</li>
+        <li>Programs(50 color pcs)</li>
+        <li>Hearse</li>
+        <li>Still water (24pck) </li>
+        <li>Grave Setup</li>
+      </div>
+      <div class="cost-note-col">
+        <h4>Additional Cost Policy</h4>
+        <p>Any request beyond the policy's cover amount is arranged separately, and must be agreed with us before the service. This can include:</p>
+        
+        <ul>
+          <li>Upgraded coffins or caskets</li>
+          <li>Additional vehicles</li>
+          <li>Tombstone services</li>
+          <li>Extended funeral programmes, décor or tents</li>
+          <li>Long-distance transportation</li>
+          <li>Obituary Audio</li>
+          <li>etc</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Get In Touch</span>
+      <h2>We're here when you need us</h2>
+      <p>Speak to our admin personnel about registration, existing cover, or a claim — by call or WhatsApp.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-list reveal">
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L7.9 9.7a16 16 0 006.4 6.4l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6a2 2 0 011.7 2.1z"/></svg>
+          <div>
+            <div class="label">Phone</div>
+            <div class="val"><a href="tel:0647806602">064 780 6602</a> · <a href="tel:0612857314">061 285 7314</a> · <a href="tel:0635266066">063 526 6066</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>
+          <div>
+            <div class="label">Email</div>
+            <div class="val"><a href="mailto:gqomfafunerald@gmail.com">gqomfafunerald@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s7-7.4 7-12.6A7 7 0 005 9.4C5 14.6 12 22 12 22z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <div>
+            <div class="label">Address</div>
+            <div class="val">ERF 422, Vaaldraai, Keiskammahoek,<br>Eastern Cape, 5670</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg>
+          <div>
+            <div class="label">Office</div>
+            <div class="val">For full terms, exclusions and policy rules, speak to our admin team directly by call or WhatsApp.</div>
+          </div>
+        </div>
+      </div>
+
+      <form class="enquiry-form reveal" id="enquiryForm">
+        <span class="eyebrow" style="display:block; margin-bottom:8px;">Request a Callback</span>
+        <h4 style="font-size:1.3rem; font-weight:500; margin-bottom:22px;">Prefer we call you?</h4>
+
+        <!-- Web3Forms access key — replace with your own, see chat for setup steps -->
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+        <input type="hidden" name="subject" value="New enquiry — Gqomfa Funeral Directors website">
+        <input type="checkbox" name="botcheck" style="display:none;">
+
+        <div class="ef-field">
+          <label for="ef-name">Full Name <span class="ef-req">*</span></label>
+          <input type="text" id="ef-name" name="name" required>
+        </div>
+        <div class="ef-field">
+          <label for="ef-phone">Phone Number <span class="ef-req">*</span></label>
+          <input type="tel" id="ef-phone" name="phone" placeholder="e.g. 082 123 4567" required>
+        </div>
+        <div class="ef-field">
+          <label for="ef-interest">I'm enquiring about <span class="ef-req">*</span></label>
+          <select id="ef-interest" name="interest" required>
+            <option value="">Select an option</option>
+            <option>New policy registration — Single Member</option>
+            <option>New policy registration — Extended Family (1+5)</option>
+            <option>New policy registration — Extended Family (1+9)</option>
+            <option>Existing policy / premium query</option>
+            <option>Claim assistance</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn solid" id="ef-submit" style="width:100%; justify-content:center;">Send Enquiry</button>
+        <div class="ef-status" id="ef-status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="22" stroke="#b8934f" stroke-width="1"/>
+          <path d="M14 26c3-6 8-9 10-9-1 2-1 4 0 6 2-1 5-1 7 1-3 1-5 1-6 3 3 0 5 1 6 3-4 1-8 0-10-2-3 2-5 2-7-2z" fill="#b8934f"/>
+        </svg>
+        <span>Gqomfa Funeral Directors</span>
+      </div>
+      <div class="footer-tag">"Where Every Life is Honoured"</div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#cover">Cover</a>
+        <a href="#premiums">Premiums</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-meta" style="margin-top:28px;">Reg. 2026/151129/07 — Gqomfa Funeral Directors, Keiskammahoek, Eastern Cape.</div>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:0.12});
+  revealEls.forEach(el=>io.observe(el));
+
+  // mobile nav (simple toggle to links list)
+  const burger = document.querySelector('.burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', ()=>{
+    if(navLinks.style.display === 'flex'){
+      navLinks.style.display = 'none';
+    } else {
+      navLinks.style.display = 'flex';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '64px';
+      navLinks.style.right = '20px';
+      navLinks.style.left = '20px';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.gap = '18px';
+      navLinks.style.background = 'rgba(21,18,13,0.98)';
+      navLinks.style.border = '1px solid rgba(184,147,79,0.28)';
+      navLinks.style.padding = '24px';
+    }
+  });
+
+  // premium calculator data
+  const premiums = {
+    single: {
+      label: 'Single Member',
+      join: 'R100',
+      ages: [
+        {range:'18–64 yrs', price:150},
+        {range:'65–74 yrs', price:180},
+        {range:'75–84 yrs', price:305},
+        
+      ]
+    },
+    fam5: {
+      label: 'Extended Family (1+5 pax)',
+      join: 'R150',
+      ages: [
+        {range:'18–64 yrs', price:350},
+        {range:'65–75 yrs', price:450},
+        {range:'75-84 yrs', price:650},
+      ]
+    },
+    fam9: {
+      label: 'Extended Family (1+9 pax)',
+      join: 'R150',
+      ages: [
+        {range:'0–64 yrs', price:550},
+        {range:'65–74 yrs', price:650},
+        {range:'75–84 yrs', price:750},
+
+       
+      ]
+    }
+  };
+
+  const typeRow = document.getElementById('typeRow');
+  const ageRow = document.getElementById('ageRow');
+  const resultType = document.getElementById('resultType');
+  const resultPrice = document.getElementById('resultPrice');
+  const resultAge = document.getElementById('resultAge');
+  const joinFee = document.getElementById('joinFee');
+
+  let currentType = null;
+
+  typeRow.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.pill');
+    if(!btn) return;
+    [...typeRow.children].forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    currentType = btn.dataset.type;
+    renderAges();
+    resultType.textContent = premiums[currentType].label;
+    resultPrice.textContent = '—';
+    resultAge.textContent = 'Choose an age range to see your premium.';
+    joinFee.textContent = premiums[currentType].join + ' — payable on registration, non-refundable.';
+  });
+
+  function renderAges(){
+    ageRow.innerHTML = '';
+    premiums[currentType].ages.forEach((a, i)=>{
+      const b = document.createElement('button');
+      b.className = 'pill';
+      b.textContent = a.range;
+      b.dataset.price = a.price;
+      b.addEventListener('click', ()=>{
+        [...ageRow.children].forEach(p=>p.classList.remove('active'));
+        b.classList.add('active');
+        resultPrice.textContent = a.price + '.00';
+        resultAge.textContent = premiums[currentType].label + ', ' + a.range;
+      });
+      ageRow.appendChild(b);
+    });
+  }
+
+  // table toggle
+  const tableBtn = document.getElementById('tableToggleBtn');
+  const fullTable = document.getElementById('fullTable');
+  tableBtn.addEventListener('click', ()=>{
+    fullTable.classList.toggle('show');
+    tableBtn.textContent = fullTable.classList.contains('show') ? 'Hide full premium table' : 'View full premium table';
+  });
+
+  // enquiry form submission (Web3Forms — no backend required)
+  const enquiryForm = document.getElementById('enquiryForm');
+  const efStatus = document.getElementById('ef-status');
+  const efSubmit = document.getElementById('ef-submit');
+
+  enquiryForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    efSubmit.disabled = true;
+    efSubmit.textContent = 'Sending…';
+    efStatus.className = 'ef-status';
+
+    const formData = new FormData(enquiryForm);
+    const json = JSON.stringify(Object.fromEntries(formData));
+
+    try{
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method:'POST',
+        headers:{'Content-Type':'application/json', 'Accept':'application/json'},
+        body: json
+      });
+      const result = await res.json();
+      if(result.success){
+        efStatus.textContent = "Thank you — we've received your enquiry and will be in touch shortly.";
+        efStatus.className = 'ef-status ok';
+        enquiryForm.reset();
+      } else {
+        throw new Error(result.message || 'Something went wrong');
+      }
+    } catch(err){
+      efStatus.textContent = 'Sorry, something went wrong. Please call us directly on 064 780 6602.';
+      efStatus.className = 'ef-status err';
+    } finally {
+      efSubmit.disabled = false;
+      efSubmit.textContent = 'Send Enquiry';
+    }
+  });
+</script>
+</body>
+</html>
