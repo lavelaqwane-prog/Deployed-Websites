@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gqomfa Funeral Directors — Where Every Life is honoured</title>
-<meta name="google-site-verification" content="IQUKh_L7Z1t0oQ7QCPt05yxlJBcZuLuCgSq6vM_PT5I" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -165,6 +164,7 @@
     background:var(--ink); border:2px solid var(--gold);
   }
   .tl-point.filled{background:var(--gold);}
+  .tl-point.active{background:var(--gold);}
   .tl-label{
     position:absolute; top:-64px; width:220px; text-align:left;
     transform:translateX(-50%);
@@ -174,7 +174,9 @@
   .tl-label .tl-name{font-size:0.8rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--bone-dim); margin-top:4px;}
   .tl-desc{
     position:absolute; top:36px; width:230px; font-size:0.86rem; color:var(--bone-dim); font-weight:300; transform:translateX(-50%);
+    opacity:0; visibility:hidden; transition:opacity .25s ease;
   }
+  .tl-desc.active{opacity:1; visibility:visible;}
   .tl-point[data-p="0"]{left:2%;}
   .tl-point[data-p="6"]{left:50%;}
   .tl-point[data-p="12"]{left:96%;}
@@ -363,7 +365,7 @@
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-cta">
-      <a class="nav-phone" href="tel:0647806602">064 780 6602 |064 870 3685 | 061 285 7314 </a>
+      <a class="nav-phone" href="tel:0647806602">064 780 6602 |064 870 3855 | 061 285 7314 </a>
       <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -383,13 +385,13 @@
       <div class="hero-actions reveal in">
         <a href="#premiums" class="btn solid">View policy premiums</a>
         <a href="tel:0647806602" class="btn">Call 064 780 6602</a>
-        <a href="tel:0648703855" class="btn">Call 064 870 3685</a>
+        <a href="tel:0648703855" class="btn">Call 064 870 3855</a>
         <a href="tel:0612857314" class="btn">Call 061 285 7314</a>
       </div>
       <div class="hero-reg reveal in">Reg. 2026/151129/07</div>
     </div>
   </div>
-  <div class="scroll-cue"><span class="line"></span></div>
+  <div class="scroll-cue"><span class="line"></span>Scroll</div>
 </section>
 
 <!-- ===== ABOUT ===== -->
@@ -425,7 +427,7 @@
 
     <div class="timeline-wrap reveal">
       <div class="timeline-track">
-        <div class="tl-point filled" data-p="0"></div>
+        <div class="tl-point" data-p="0"></div>
         <div class="tl-point" data-p="6"></div>
         <div class="tl-point" data-p="12"></div>
 
@@ -445,9 +447,9 @@
         <div class="tl-row"><div class="tl-time">12 mo</div><div><div class="tl-name">Suicide Clause</div><div class="tl-desc">Covered only after twelve months of continuous, uninterrupted premium payments.</div></div></div>
       </div>
 
-      <div class="accident-note">
+      <div class="accident-note" id="accidentNote">
       
-        <div></div><strong>Accidental death cover applies immediately</strong> — provided the first monthly premium has been successfully paid and the policy is active at the time of death. Gqomfa Funeral Directors reserves the right to request supporting documents or official reports for accidental death claims.
+        <div></div><strong id="anTitle">Accidental death cover applies immediately</strong> — <span id="anText">provided the first monthly premium has been successfully paid and the policy is active at the time of death. Gqomfa Funeral Directors reserves the right to request supporting documents or official reports for accidental death claims.</span>
       </div>
     </div>
   </div>
@@ -459,13 +461,13 @@
     <div class="section-head reveal">
       <span class="eyebrow">Policy Premiums</span>
       <h2>Find your monthly premium</h2>
-      <p>Choose a policy type and an age range to see the monthly premium. A once-off non-refundable joining fee applies on registration for R100.Membership will become active once joining fee and first monthly premium is recieved.</p>
-      <p>Monthly premium must be paid on or before the agreed payment date each month. Failure to pay may result in suspension or cancellation of cover.</p>
+      <p>Choose a policy type and an age range to see the monthly premium. A once-off non-refundable joining fee applies on registration — R100 for a Single Member, R150 for Extended Family.Memebership will become active once joining fee and first monthly premium is recieved.</p>
+      <p>Monthly premium must be paid on or before the agreed payment date each month. Failure to pay may result in suspension of cancelllation of cover.</p>
     <p> Failure to pay premiums for two consecutive months will result in the automatic policy lapse and forfeiture of all benefits.</p>
      <!-- ====Test====-->
        <div class="accident-note">
       
-        <div></div><strong>Important Notice</strong> — A 6-month waiting period applies from the reciept of the first premium. No funeral benefits may be claimed during this period. <br> Immediate cover for accidental death. <br> Memebers qualify for a funeral cover from as little as <strong> R10 000</strong> - which is not paid in cash and may only be used for funeral services by Gqomfa Funeral Directors.
+        <div></div><strong>Important Notice</strong> — A 6-month waiting period applies from the reciept of the first premium. No funeral benefits may be claimed during this period. <br> Immediate cover for accidental death. <br> Memebers qualify for a funeral cover from as little as <strong> R15 000</strong> - which is not paid in cash and may only be used for funeral services by Gqomfa Funeral Directors.
       </div>
     
   </div>
@@ -489,7 +491,7 @@
         <span class="eyebrow" id="resultType">Select a policy type</span>
         <div class="price"><sup>R</sup><span id="resultPrice">—</span><span class="per"> /month</span></div>
         <div class="calc-sub" id="resultAge">Choose an age range to see your premium.</div>
-        <div class="join-fee">Once-off joining fee: <strong id="joinFee">R100 (Single) / R100(Extended Family)</strong> — payable on registration, non-refundable.</div>
+        <div class="join-fee">Once-off joining fee: <strong id="joinFee">R100 (Single) / R150 (Extended Family)</strong> — payable on registration, non-refundable.</div>
       </div>
     </div>
 
@@ -506,7 +508,7 @@
         <tr><td>Extended Family (1+5 pax)</td><td>18 – 64 yrs</td><td>R350.00</td></tr>
         <tr><td>Extended Family (1+5 pax)</td><td>65 – 74 yrs</td><td>R450.00</td></tr>
         <tr><td>Extended Family (1+5 pax)</td><td>75 – 84 yrs</td><td>R650.00</td></tr>
-        <tr><td>Extended Family (1+9 pax)</td><td>18 – 64 yrs</td><td>R550.00</td></tr>
+        <tr><td>Extended Family (1+9 pax)</td><td>0 – 64 yrs</td><td>R550.00</td></tr>
         <tr><td>Extended Family (1+9 pax)</td><td>65 – 74 yrs</td><td>R650.00</td></tr>
         <tr><td>Extended Family (1+9 pax)</td><td>75 – 84 yrs</td><td>R750.00</td></tr>
         
@@ -562,6 +564,7 @@
         <li>Wreath</li>
         <li>Programs(50 color pcs)</li>
         <li>Hearse</li>
+        <li>Still water (24pck) </li>
         <li>Grave Setup</li>
       </div>
       <div class="cost-note-col">
@@ -597,14 +600,14 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L7.9 9.7a16 16 0 006.4 6.4l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6a2 2 0 011.7 2.1z"/></svg>
           <div>
             <div class="label">Phone</div>
-            <div class="val"><a href="tel:0647806602">064 780 6602</a> · <a href="tel:0612857314">061 285 7314</a> · <a href="tel:0648703685">064 870 3685</a></div>
+            <div class="val"><a href="tel:0647806602">064 780 6602</a> · <a href="tel:0612857314">061 285 7314</a> · <a href="tel:0635266066">063 526 6066</a></div>
           </div>
         </div>
         <div class="contact-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>
           <div>
             <div class="label">Email</div>
-            <div class="val"><a href="mailto:gqomfafunerald@gmail.com">admin@gqomfafunerals.co.za</a></div>
+            <div class="val"><a href="mailto:gqomfafunerald@gmail.com">gqomfafunerald@gmail.com</a></div>
           </div>
         </div>
         <div class="contact-row">
@@ -627,7 +630,6 @@
         <span class="eyebrow" style="display:block; margin-bottom:8px;">Request a Callback</span>
         <h4 style="font-size:1.3rem; font-weight:500; margin-bottom:22px;">Prefer we call you?</h4>
 
-        <!-- Web3Forms access key — replace with your own, see chat for setup steps -->
         <input type="hidden" name="access_key" value="d91f7578-a230-4e64-a70e-2f73a318a547">
         <input type="hidden" name="subject" value="New enquiry — Gqomfa Funeral Directors website">
         <input type="checkbox" name="botcheck" style="display:none;">
@@ -711,6 +713,48 @@
     }
   });
 
+  // timeline hover/tap interaction
+  const tlPoints = document.querySelectorAll('.timeline-track .tl-point');
+  const tlLabels = document.querySelectorAll('.timeline-track .tl-label');
+  const tlDescs  = document.querySelectorAll('.timeline-track .tl-desc');
+  const anTitle  = document.getElementById('anTitle');
+  const anText   = document.getElementById('anText');
+
+  const tlNoteContent = {
+    '0': {
+      title: 'Accidental death cover applies immediately',
+      text: 'provided the first monthly premium has been successfully paid and the policy is active at the time of death. Gqomfa Funeral Directors reserves the right to request supporting documents or official reports for accidental death claims.'
+    },
+    '6': {
+      title: 'Natural death requires a 6-month waiting period',
+      text: 'no funeral benefits may be claimed for a natural death within the first six months of continuous premium payments from the policy start date.'
+    },
+    '12': {
+      title: 'Suicide is covered only after 12 months',
+      text: 'the suicide clause is honoured only once twelve months of continuous, uninterrupted premium payments have been completed.'
+    }
+  };
+
+  function setActiveTl(p){
+    tlPoints.forEach(pt => pt.classList.toggle('active', pt.dataset.p === p));
+    tlDescs.forEach(d => d.classList.toggle('active', d.dataset.p === p));
+    const note = tlNoteContent[p];
+    if(note){
+      anTitle.textContent = note.title;
+      anText.textContent = note.text;
+    }
+  }
+  function resetActiveTl(){
+    setActiveTl('0'); // return to Day 1 as the resting/default state
+  }
+
+  [...tlPoints, ...tlLabels].forEach(el=>{
+    el.addEventListener('mouseenter', ()=> setActiveTl(el.dataset.p));
+    el.addEventListener('mouseleave', resetActiveTl);
+    el.addEventListener('click', ()=> setActiveTl(el.dataset.p)); // tap support on touch devices
+  });
+  setActiveTl('0'); // Day 1 filled, and its info shown, by default on load
+
   // premium calculator data
   const premiums = {
     single: {
@@ -725,7 +769,7 @@
     },
     fam5: {
       label: 'Extended Family (1+5 pax)',
-      join: 'R100',
+      join: 'R150',
       ages: [
         {range:'18–64 yrs', price:350},
         {range:'65–75 yrs', price:450},
@@ -734,7 +778,7 @@
     },
     fam9: {
       label: 'Extended Family (1+9 pax)',
-      join: 'R100',
+      join: 'R150',
       ages: [
         {range:'0–64 yrs', price:550},
         {range:'65–74 yrs', price:650},
@@ -831,3 +875,4 @@
 </script>
 </body>
 </html>
+
